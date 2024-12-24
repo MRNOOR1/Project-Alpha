@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('includes/head') %>
+  <body>
+    <%- include('includes/header') %>
+
+    <main>
+      <!-- Introduction Section -->
+      <section>
+        <h2>Welcome to Our Productivity Platform</h2>
+        <p>
+          Manage your tasks, collaborate with your team, and stay organised
+          effortlessly. Join us to streamline your projects and achieve your
+          goals faster and smarter.
+        </p>
+        <a href="#register">Get Started</a>
+      </section>
+
+      <!-- Registration Section -->
+      <section id="register">
+        <h2>Create an Account</h2>
+        <% if (errors && errors.length > 0) { %>
+        <div>
+          <% errors.forEach(error => { %>
+          <p><strong>Error:</strong> <%= error %></p>
+          <% }) %>
+        </div>
+        <% } %>
+
+        <form action="/register" method="POST">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            autocomplete="off"
+            placeholder="Enter your username"
+            required
+          />
+
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            autocomplete="off"
+            placeholder="Enter your email"
+            required
+          />
+
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            autocomplete="off"
+            placeholder="Enter your password"
+            required
+          />
+
+          <button type="submit">Sign Up</button>
+        </form>
+      </section>
+    </main>
+
+    <%- include('includes/footer') %>
+  </body>
+</html>

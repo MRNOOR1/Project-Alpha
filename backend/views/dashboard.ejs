@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("includes/head.ejs") %>
+  <body>
+    <%- include("includes/header.ejs") %>
+    <main>
+      <!-- Dashboard Header -->
+      <header style="text-align: center; margin: 2rem 0">
+        <h1>Tuesday, December 17</h1>
+        <h2>Good evening, Mohammad</h2>
+        <div style="margin-top: 1rem">
+          <span>My week ▼</span>
+          <span> | </span>
+          <span>0 tasks completed</span>
+          <span> | </span>
+          <span>0 collaborators</span>
+        </div>
+      </header>
+
+      <!-- Main Dashboard Content -->
+      <section style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem">
+        <!-- Tasks Section -->
+        <article
+          style="border: 1px solid #ccc; border-radius: 8px; padding: 1rem"
+        >
+          <h2>My Tasks</h2>
+          <div>
+            <button style="margin: 0.5rem 0">+ Create Task</button>
+            <ul style="list-style: none; padding: 0">
+              <li
+                style="
+                  margin: 0.5rem 0;
+                  padding: 0.5rem;
+                  border: 1px solid #ccc;
+                  border-radius: 4px;
+                "
+              >
+                Test Cases <span style="float: right">Digital Twin</span>
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Sidebar: Projects and People -->
+        <aside>
+          <!-- Projects Section -->
+          <section
+            style="
+              border: 1px solid #ccc;
+              border-radius: 8px;
+              padding: 1rem;
+              margin-bottom: 2rem;
+            "
+          >
+            <h2>Projects</h2>
+            <button style="margin: 0.5rem 0">+ Create Project</button>
+            <ul style="list-style: none; padding: 0">
+              <li
+                style="
+                  margin: 0.5rem 0;
+                  padding: 0.5rem;
+                  border: 1px solid #ccc;
+                  border-radius: 4px;
+                "
+              >
+                <span>Digital Twin</span>
+              </li>
+            </ul>
+          </section>
+
+          <!-- People Section -->
+          <section
+            style="border: 1px solid #ccc; border-radius: 8px; padding: 1rem"
+          >
+            <h2>People</h2>
+            <button style="margin: 0.5rem 0">+ Invite</button>
+            <ul style="list-style: none; padding: 0">
+              <li
+                style="
+                  margin: 0.5rem 0;
+                  padding: 0.5rem;
+                  border: 1px solid #ccc;
+                  border-radius: 4px;
+                "
+              >
+                <span>Branko Roknic</span>
+              </li>
+            </ul>
+          </section>
+        </aside>
+      </section>
+    </main>
+    <%- include("includes/footer.ejs") %>
+  </body>
+</html>
