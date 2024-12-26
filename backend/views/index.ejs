@@ -22,7 +22,7 @@
         <% if (errors && errors.length > 0) { %>
         <div>
           <% errors.forEach(error => { %>
-          <p><strong>Error:</strong> <%= error %></p>
+          <p class="notice"><%= error %></p>
           <% }) %>
         </div>
         <% } %>

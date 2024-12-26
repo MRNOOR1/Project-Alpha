@@ -1,13 +1,14 @@
 const express = require("express");
-const db = require("../models/db");
+const { connectToDb } = require("../models/db"); // Ensure you're using the correct method
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { addUser } = require("../models/users");
+const { addUser } = require("../models/users"); // Ensure addUser function is correct
 const router = express.Router();
 
 router.post("/", async (req, res) => {
   const errors = [];
 
+  // Validate inputs
   if (typeof req.body.username !== "string") req.body.username = "";
   if (typeof req.body.password !== "string") req.body.password = "";
   if (typeof req.body.email !== "string") req.body.email = "";
@@ -15,6 +16,7 @@ router.post("/", async (req, res) => {
   req.body.username = req.body.username.trim();
   req.body.email = req.body.email.trim();
 
+  // Check for validation errors
   if (!req.body.username) errors.push("You must provide a username");
   if (req.body.username.length < 3)
     errors.push("Username must be longer than 3 characters");
@@ -47,21 +49,22 @@ router.post("/", async (req, res) => {
   if (emailCheck) errors.push("Email is already taken");
 
   if (errors.length) {
-    return res.render("index", { errors });
+    return res.render("index", { errors }); // or use res.json(errors) if you prefer a JSON response
   }
 
+  // Hash password
   const salt = bcrypt.genSaltSync(10);
   const hashedPassword = bcrypt.hashSync(req.body.password, salt);
 
   try {
-    // Insert new user into MongoDB
-
-    addUser(req.body.username, req.body.email, hashedPassword);
+    // Insert new user into MongoDB using the addUser function
+    await addUser(req.body.username, req.body.email, hashedPassword); // Ensure addUser is async
   } catch (err) {
     errors.push("Error creating the user.");
-    return res.render("index", { errors });
+    return res.render("index", { errors }); // or res.json(errors)
   }
 
+  // Create JWT token
   const token = jwt.sign(
     {
       exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24, // Token expires in 24 hours
@@ -70,14 +73,15 @@ router.post("/", async (req, res) => {
     process.env.JWTSECRET
   );
 
+  // Send cookie with JWT token
   res.cookie("cookie", token, {
     httpOnly: true,
-    secure: true,
+    secure: true, // Set to false in development without HTTPS
     sameSite: "strict",
     maxAge: 1000 * 60 * 60 * 24, // Cookie expires in 24 hours
   });
 
-  res.redirect("/");
+  res.redirect("/"); // Redirect to home or another page after successful registration
 });
 
 module.exports = router;

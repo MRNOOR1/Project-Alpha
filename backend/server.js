@@ -15,15 +15,10 @@ const { createUsersCollection } = require("./models/users");
 const { createProjectsCollection } = require("./models/projects");
 const { createTasksCollection } = require("./models/tasks");
 const { createCommentsCollection } = require("./models/comments");
-const { createActivityLogsCollection } = require("./models/activityLogs");
 const { createTaskAssignmentsCollection } = require("./models/taskAssignments");
 
 createUsersCollection();
-createProjectsCollection();
-createTasksCollection();
-createCommentsCollection();
-createActivityLogsCollection();
-createTaskAssignmentsCollection();
+
 
 // end
 app.set("view engine", "ejs");

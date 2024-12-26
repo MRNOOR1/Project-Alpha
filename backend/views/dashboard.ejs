@@ -18,21 +18,41 @@
       </header>
 
       <!-- Main Dashboard Content -->
-      <section style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem">
+      <section
+        class="grid-container"
+        style="
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 2rem;
+          padding: 1rem;
+        "
+      >
         <!-- Tasks Section -->
         <article
-          style="border: 1px solid #ccc; border-radius: 8px; padding: 1rem"
+          class="card"
+          style="
+            border-radius: 8px;
+            padding: 1rem;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+          "
         >
           <h2>My Tasks</h2>
           <div>
-            <button style="margin: 0.5rem 0">+ Create Task</button>
-            <ul style="list-style: none; padding: 0">
+            <button class="button" style="margin: 0.5rem 0">
+              + Create Task
+            </button>
+            <ul class="task-list" style="list-style: none; padding: 0">
               <li
+                class="task-item"
                 style="
                   margin: 0.5rem 0;
                   padding: 0.5rem;
-                  border: 1px solid #ccc;
                   border-radius: 4px;
+                  background-color: #fff;
+                  border: 1px solid #ccc;
                 "
               >
                 Test Cases <span style="float: right">Digital Twin</span>
@@ -41,53 +61,58 @@
           </div>
         </article>
 
-        <!-- Sidebar: Projects and People -->
-        <aside>
-          <!-- Projects Section -->
-          <section
-            style="
-              border: 1px solid #ccc;
-              border-radius: 8px;
-              padding: 1rem;
-              margin-bottom: 2rem;
-            "
-          >
-            <h2>Projects</h2>
-            <button style="margin: 0.5rem 0">+ Create Project</button>
-            <ul style="list-style: none; padding: 0">
-              <li
-                style="
-                  margin: 0.5rem 0;
-                  padding: 0.5rem;
-                  border: 1px solid #ccc;
-                  border-radius: 4px;
-                "
-              >
-                <span>Digital Twin</span>
-              </li>
-            </ul>
-          </section>
+        <!-- Projects Section -->
+        <section
+          class="card"
+          style="
+            border-radius: 8px;
+            padding: 1rem;
+            background-color: #f4f4f9;
+            margin-bottom: 2rem;
+          "
+        >
+          <h2>Projects</h2>
+          <button class="button" style="margin: 0.5rem 0">
+            + Create Project
+          </button>
+          <ul class="project-list" style="list-style: none; padding: 0">
+            <li
+              class="project-item"
+              style="
+                margin: 0.5rem 0;
+                padding: 0.5rem;
+                border-radius: 4px;
+                background-color: #fff;
+                border: 1px solid #ccc;
+              "
+            >
+              <span>Digital Twin</span>
+            </li>
+          </ul>
+        </section>
 
-          <!-- People Section -->
-          <section
-            style="border: 1px solid #ccc; border-radius: 8px; padding: 1rem"
-          >
-            <h2>People</h2>
-            <button style="margin: 0.5rem 0">+ Invite</button>
-            <ul style="list-style: none; padding: 0">
-              <li
-                style="
-                  margin: 0.5rem 0;
-                  padding: 0.5rem;
-                  border: 1px solid #ccc;
-                  border-radius: 4px;
-                "
-              >
-                <span>Branko Roknic</span>
-              </li>
-            </ul>
-          </section>
-        </aside>
+        <!-- People Section -->
+        <section
+          class="card"
+          style="border-radius: 8px; padding: 1rem; background-color: #f4f4f9"
+        >
+          <h2>People</h2>
+          <button class="button" style="margin: 0.5rem 0">+ Invite</button>
+          <ul class="people-list" style="list-style: none; padding: 0">
+            <li
+              class="people-item"
+              style="
+                margin: 0.5rem 0;
+                padding: 0.5rem;
+                border-radius: 4px;
+                background-color: #fff;
+                border: 1px solid #ccc;
+              "
+            >
+              <span>Branko Roknic</span>
+            </li>
+          </ul>
+        </section>
       </section>
     </main>
     <%- include("includes/footer.ejs") %>
