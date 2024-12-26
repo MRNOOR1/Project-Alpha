@@ -1,6 +1,6 @@
 const { MongoClient } = require("mongodb");
 
-const uri = "mongodb+srv://mrnoori:FRyxBmK6j43YD8UW@alpha.uw4tq.mongodb.net/"; // Replace with your MongoDB connection URI
+const uri = process.env.URLSECRET; // Replace with your MongoDB connection URI
 const client = new MongoClient(uri, { useUnifiedTopology: true }); // Use the unified topology
 const dbName = "Alpha"; // Replace with your database name
 
