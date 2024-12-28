@@ -41,9 +41,7 @@
         >
           <h2>My Tasks</h2>
           <div>
-            <button class="button" style="margin: 0.5rem 0">
-              + Create Task
-            </button>
+            <button class="button">+ Create Task</button>
             <ul class="task-list" style="list-style: none; padding: 0">
               <li
                 class="task-item"
@@ -72,10 +70,9 @@
           "
         >
           <h2>Projects</h2>
-          <button class="button" style="margin: 0.5rem 0">
-            + Create Project
-          </button>
+          <a href="/addProjects"> Create Project</a>
           <ul class="project-list" style="list-style: none; padding: 0">
+            <% projects.forEach(project => { %>
             <li
               class="project-item"
               style="
@@ -86,8 +83,10 @@
                 border: 1px solid #ccc;
               "
             >
-              <span>Digital Twin</span>
+              <span><%= project.name %></span>
+              <!-- Render the project name -->
             </li>
+            <% }) %>
           </ul>
         </section>
 

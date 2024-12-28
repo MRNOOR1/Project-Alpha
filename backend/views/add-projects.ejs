@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('includes/head') %>
+  <body>
+    <%- include('includes/header') %>
+
+     <form action="/addProjects" method="POST">
+      <div>
+        <label for="name">Project Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter project name" required />
+      </div>
+
+      <div>
+        <label for="description">Project Description:</label>
+        <textarea id="description" name="description" placeholder="Enter project description" required></textarea>
+      </div>
+
+      <button type="submit">Add Project</button>
+    </form>
+  </main>
+
+    <%- include('includes/footer') %>
+  </body>
+</html>

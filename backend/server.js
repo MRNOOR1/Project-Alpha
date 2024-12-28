@@ -9,18 +9,22 @@ const sanitizeHTML = require("sanitize-html");
 const { decodeCookie, mustBeLoggedIn } = require("./middleware/auth");
 const login = require("./routes/login");
 const register = require("./routes/register");
+const addProjectsRouter = require("./routes/addProjects");
 
-//databsse
+// Database setup
 const { createUsersCollection } = require("./models/users");
-const { createProjectsCollection } = require("./models/projects");
+const {
+  createProjectsCollection,
+  getProjectsByUser,
+} = require("./models/projects");
 const { createTasksCollection } = require("./models/tasks");
 const { createCommentsCollection } = require("./models/comments");
 const { createTaskAssignmentsCollection } = require("./models/taskAssignments");
 
 createUsersCollection();
+createProjectsCollection();
 
-
-// end
+// Set up view engine and middlewares
 app.set("view engine", "ejs");
 
 app.use(express.urlencoded({ extended: false }));
@@ -29,26 +33,34 @@ app.use(cookieparser());
 
 app.use(decodeCookie);
 
+// Middleware to initialize errors array for each response
 app.use(function (req, res, next) {
   res.locals.errors = [];
   next();
 });
 
-app.get("/", (req, res) => {
+// Routes
+app.get("/", async (req, res) => {
   if (req.user) {
-    return res.render("dashboard");
+    // Fetch projects only if user is logged in
+    const projects = await getProjectsByUser(req.user.userid);
+    return res.render("dashboard", { projects });
   } else {
     res.render("index");
   }
 });
 
 app.use("/login", login);
-
 app.use("/register", register);
+app.use("/addProjects", addProjectsRouter);
 
+// Logout route
 app.get("/logout", (req, res) => {
   res.clearCookie("cookie");
   res.redirect("/");
 });
+
+// Protect all routes after this with mustBeLoggedIn middleware
+app.use(mustBeLoggedIn);
 
 app.listen(3000);
