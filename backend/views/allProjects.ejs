@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('includes/head') %>
+  <body>
+    <header>
+      <h1>All Projects</h1>
+    </header>
+
+    <main>
+      <section>
+        <h2>Projects List</h2>
+        <ul>
+          <% if (projects && projects.length > 0) { %>
+          <!-- Proper opening and closing of 'if' -->
+          <% projects.forEach(function(project) { %>
+          <!-- Fix for 'forEach' loop -->
+          <li>
+            <h3>
+              <a href="/projects/<%= project._id %>"><%= project.name %></a>
+            </h3>
+            <p><strong>Description:</strong> <%= project.description %></p>
+            <p>
+              <strong>Created At:</strong> <%= new
+              Date(project.created_at).toLocaleString() %>
+            </p>
+          </li>
+          <% }); %>
+          <!-- Proper closing of 'forEach' loop -->
+          <% } else { %>
+          <p>No projects available.</p>
+          <% } %>
+          <!-- Proper closing of 'if' -->
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>

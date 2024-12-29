@@ -9,13 +9,15 @@ const sanitizeHTML = require("sanitize-html");
 const { decodeCookie, mustBeLoggedIn } = require("./middleware/auth");
 const login = require("./routes/login");
 const register = require("./routes/register");
-const addProjectsRouter = require("./routes/addProjects");
+const addProjectsRouter = require("./services/addProjects");
+const Projects = require("./routes/projects");
 
 // Database setup
 const { createUsersCollection } = require("./models/users");
 const {
   createProjectsCollection,
   getProjectsByUser,
+  getProjectById,
 } = require("./models/projects");
 const { createTasksCollection } = require("./models/tasks");
 const { createCommentsCollection } = require("./models/comments");
@@ -52,7 +54,6 @@ app.get("/", async (req, res) => {
 
 app.use("/login", login);
 app.use("/register", register);
-app.use("/addProjects", addProjectsRouter);
 
 // Logout route
 app.get("/logout", (req, res) => {
@@ -62,5 +63,7 @@ app.get("/logout", (req, res) => {
 
 // Protect all routes after this with mustBeLoggedIn middleware
 app.use(mustBeLoggedIn);
+app.use("/addProjects", addProjectsRouter);
+app.use("/projects", Projects);
 
 app.listen(3000);

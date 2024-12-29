@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('includes/head') %>
+  <body>
+    <header>
+      <h1>Project Details</h1>
+    </header>
+
+    <main>
+      <section>
+        <h2><%= project.name %></h2>
+        <p>
+          <strong>Description:</strong>
+          <%= project.description || "No description provided." %>
+        </p>
+        <p>
+          <strong>Created At:</strong>
+          <%= new Date(project.created_at).toLocaleString() %>
+        </p>
+
+        <h3>Tasks</h3>
+        <ul>
+          <% if (project.tasks && project.tasks.length > 0) { %> <%
+          project.tasks.forEach(task => { %>
+          <li><%= task.name %></li>
+          <% }) %> <% } else { %>
+          <li>No tasks available for this project.</li>
+          <% } %>
+        </ul>
+
+        <form action="/tasks/add" method="POST">
+          <input type="hidden" name="projectId" value="<%= project._id %>" />
+          <button type="submit">Add Task</button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

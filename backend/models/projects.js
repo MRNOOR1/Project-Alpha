@@ -14,6 +14,7 @@
  */
 
 const { connectToDb } = require("./db");
+const mongoose = require("mongoose");
 
 // Function to create the 'projects' collection and ensure indexes
 async function createProjectsCollection() {
@@ -56,4 +57,27 @@ async function getProjectsByUser(userId) {
   return projects; // Return the array of projects
 }
 
-module.exports = { createProjectsCollection, addProject, getProjectsByUser };
+async function getProjectById(projectId) {
+  try {
+    if (!mongoose.Types.ObjectId.isValid(projectId)) {
+      throw new Error("Invalid project ID format.");
+    }
+
+    const db = await connectToDb(); // Connect to the database
+    const project = await db.collection("projects").findOne({
+      _id: new mongoose.Types.ObjectId(projectId),
+    });
+
+    return project;
+  } catch (error) {
+    console.error("Error in getProjectById:", error.message);
+    throw error;
+  }
+}
+
+module.exports = {
+  createProjectsCollection,
+  addProject,
+  getProjectsByUser,
+  getProjectById,
+};

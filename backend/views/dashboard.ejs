@@ -70,7 +70,7 @@
           "
         >
           <h2>Projects</h2>
-          <a href="/addProjects"> Create Project</a>
+          <a href="/addProjects">Create Project</a>
           <ul class="project-list" style="list-style: none; padding: 0">
             <% projects.forEach(project => { %>
             <li
@@ -83,8 +83,13 @@
                 border: 1px solid #ccc;
               "
             >
-              <span><%= project.name %></span>
-              <!-- Render the project name -->
+              <a
+                href="/projects/<%= project._id %>"
+                style="text-decoration: none; color: inherit"
+              >
+                <%= project.name %>
+              </a>
+              <!-- Make the project name a clickable link -->
             </li>
             <% }) %>
           </ul>
